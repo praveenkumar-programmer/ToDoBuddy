@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoBuddy">
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.AddEditNotePage"
+            android:exported="true" />
+        <activity
+            android:name=".view.HomePage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
