@@ -2,6 +2,7 @@ package com.geeks4ever.todobuddy.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -36,6 +37,12 @@ class HomePage : AppCompatActivity(), NoteClickEditInterface, NoteClickDeleteInt
             ViewModelProvider.AndroidViewModelFactory.getInstance(application)
         ).get(NoteViewModal::class.java)
        viewModal.allNotes.observe(this, Observer { list ->
+
+           if(list == null || list.isEmpty())
+               add_hint.visibility = View.VISIBLE
+           else
+               add_hint.visibility = View.GONE
+
             list?.let {
                 noteRVAdapter.updateList(it)
             }

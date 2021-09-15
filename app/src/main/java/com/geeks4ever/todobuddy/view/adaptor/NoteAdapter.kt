@@ -10,8 +10,8 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 
 class NoteAdapter(
-    val noteClickDeleteInterface: NoteClickDeleteInterface,
-    val noteClickEditInterface: NoteClickEditInterface
+    private val noteClickDeleteInterface: NoteClickDeleteInterface,
+    private val noteClickEditInterface: NoteClickEditInterface
 ) :
     RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
 
@@ -19,11 +19,11 @@ class NoteAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val noteTV = itemView.findViewById<MaterialTextView>(R.id.idTVNote)
-        val descTv = itemView.findViewById<MaterialTextView>(R.id.idTVDesc)
-        val dateTV = itemView.findViewById<MaterialTextView>(R.id.idTVDate)
-        val deleteIV = itemView.findViewById<MaterialButton>(R.id.deleteButton)
-        val editTv = itemView.findViewById<MaterialButton>(R.id.editButton)
+        val noteTV: MaterialTextView = itemView.findViewById(R.id.idTVNote)
+        val descTv: MaterialTextView = itemView.findViewById(R.id.idTVDesc)
+        val dateTV: MaterialTextView = itemView.findViewById(R.id.idTVDate)
+        val deleteIV: MaterialButton = itemView.findViewById(R.id.deleteButton)
+        val editTv: MaterialButton = itemView.findViewById(R.id.editButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,8 +37,9 @@ class NoteAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.noteTV.setText(allNotes.get(position).noteTitle)
-        holder.dateTV.setText("Last Updated : "+allNotes.get(position).timeStamp)
+        holder.noteTV.text = allNotes[position].noteTitle
+        holder.descTv.text = allNotes[position].noteDescription
+        holder.dateTV.text = "Last Updated : "+allNotes.get(position).timeStamp
         holder.deleteIV.setOnClickListener {
 
             noteClickDeleteInterface.onDeleteIconClick(allNotes.get(position))

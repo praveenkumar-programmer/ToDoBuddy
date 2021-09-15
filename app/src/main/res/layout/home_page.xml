@@ -6,6 +6,14 @@
     android:background="@color/grey_200"
     tools:context=".view.HomePage">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/add_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="No To-Do-Item found.\nAdd one by clicking the + button."
+        android:layout_centerInParent="true"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notesRV"
         android:layout_width="match_parent"
