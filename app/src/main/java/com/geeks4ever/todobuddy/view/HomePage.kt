@@ -7,33 +7,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.geeks4ever.roomdatabase.NoteModel
 import com.geeks4ever.todobuddy.R
 import com.geeks4ever.todobuddy.view.adaptor.NoteAdapter
 import com.geeks4ever.todobuddy.view.adaptor.NoteClickDeleteInterface
-import com.geeks4ever.todobuddy.view.adaptor.NoteClickInterface
+import com.geeks4ever.todobuddy.view.adaptor.NoteClickEditInterface
 import com.geeks4ever.todobuddy.viewModel.NoteViewModal
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.home_page.*
+import kotlinx.android.synthetic.main.note_item.*
 
-class HomePage : AppCompatActivity(), NoteClickInterface, NoteClickDeleteInterface {
+class HomePage : AppCompatActivity(), NoteClickEditInterface, NoteClickDeleteInterface {
 
     lateinit var viewModal: NoteViewModal
-    lateinit var notesRV: RecyclerView
-    lateinit var addFAB: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_page)
-        notesRV = findViewById(R.id.notesRV)
-        addFAB = findViewById(R.id.idFAB)
 
         applicationContext.getSharedPreferences("log", 0).edit()
         .putInt("currentLogName", applicationContext.getSharedPreferences("log", 0)
             .getInt("currentLogName", 1)+1).apply()
 
         notesRV.layoutManager = LinearLayoutManager(this)
-        val noteRVAdapter = NoteAdapter(this, this, this)
+        val noteRVAdapter = NoteAdapter(this, this)
         notesRV.adapter = noteRVAdapter
         viewModal = ViewModelProvider(
             this,
@@ -44,14 +40,14 @@ class HomePage : AppCompatActivity(), NoteClickInterface, NoteClickDeleteInterfa
                 noteRVAdapter.updateList(it)
             }
         })
-        addFAB.setOnClickListener {
+        idFAB.setOnClickListener {
             val intent = Intent(this@HomePage, AddEditNotePage::class.java)
             startActivity(intent)
             this.finish()
         }
     }
 
-    override fun onNoteClick(noteModel: NoteModel) {
+    override fun onEditButtonClick(noteModel: NoteModel) {
         val intent = Intent(this@HomePage, AddEditNotePage::class.java)
         intent.putExtra("noteType", "Edit")
         intent.putExtra("noteTitle", noteModel.noteTitle)
@@ -69,4 +65,5 @@ class HomePage : AppCompatActivity(), NoteClickInterface, NoteClickDeleteInterfa
         viewModal.encryptFile()
         super.onDestroy()
     }
+
 }

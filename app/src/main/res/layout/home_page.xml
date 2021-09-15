@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/black_shade_1"
+    android:background="@color/grey_200"
     tools:context=".view.HomePage">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -13,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="16dp"
         tools:listitem="@layout/note_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -23,8 +23,6 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
         android:src="@android:drawable/ic_input_add"
-        app:backgroundTint="@color/teal_700"
-        app:tint="@color/white"
         android:contentDescription="Add Note" />
 
 </RelativeLayout>
